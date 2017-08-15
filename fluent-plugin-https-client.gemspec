@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |gem|
-  gem.name          = 'fluent-plugin-out-https'
+  gem.name          = 'fluent-plugin-https-client'
   gem.version       = '0.0.1'
   gem.authors       = ['Arash Vatanpoor']
   gem.email         = ['arash@a-venture.org']
