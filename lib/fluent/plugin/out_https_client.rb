@@ -30,23 +30,20 @@ class Fluent::HTTPSOutput < Fluent::Output
     @use_ssl = conf['use_ssl']
     @include_tag = conf['include_tag']
     @include_timestamp = conf['include_timestamp']
-    @proxy_port = conf['proxy_port']
-    @proxy_addr = conf['proxy_addr']
-    @endpoint_url = conf['endpoint_url']
-    @rate_limit_msec = conf['rate_limit_msec']
-    @username = conf['user']
-    @password = conf['password']
+
 
     @use_proxy = false
-    # check for proxy settings
-    if @proxy_port > 0 and @proxy_addr.empty?
-      raise Fluent::ConfigError, 'HTTPS Output :: provide a valid proxy address'
-    elsif  @proxy_port <= 0 and !@proxy_addr.empty?
-      raise Fluent::ConfigError, 'HTTPS Output :: provide a valid proxy port number'
-    elsif @proxy_port == 0
-      raise Fluent::ConfigError, 'HTTPS Output :: provide a valid proxy port number'
-    elsif  @proxy_port > 0 and !@proxy_addr.empty?
-      @use_proxy = true
+    if @proxy_port and @proxy_addr
+      # check for proxy settings
+      if @proxy_port > 0 and @proxy_addr.empty?
+        raise Fluent::ConfigError, 'HTTPS Output :: provide a valid proxy address'
+      elsif  @proxy_port <= 0 and !@proxy_addr.empty?
+        raise Fluent::ConfigError, 'HTTPS Output :: provide a valid proxy port number'
+      elsif @proxy_port == 0
+        raise Fluent::ConfigError, 'HTTPS Output :: provide a valid proxy port number'
+      elsif  @proxy_port > 0 and !@proxy_addr.empty?
+        @use_proxy = true
+      end
     end
 
     serializers = [:json, :form]
@@ -125,7 +122,7 @@ class Fluent::HTTPSOutput < Fluent::Output
     return req, uri
   end
 
-  def send_request(req, uri, record)    
+  def send_request(req, uri, record)
     is_rate_limited = (@rate_limit_msec != 0 and not @last_request_time.nil?)
     if is_rate_limited and ((Time.now.to_f - @last_request_time) * 1000.0 < @rate_limit_msec)
       $log.info('Dropped request due to rate limiting')
