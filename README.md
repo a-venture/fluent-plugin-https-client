@@ -33,8 +33,8 @@ Output plugin for [Fluentd](http://fluentd.org), for sending records to an HTTP 
  
 
 ### Credits
-* Majority of the code is cloned from  [fluent-plugin-out-http][2]
-* SSL implementation from  [fluent-plugin-out-https][3]
+* Majority of the code is cloned from [fluent-plugin-out-http](https://github.com/ento/fluent-plugin-out-http)
+* SSL implementation from [fluent-plugin-out-https](https://github.com/kazunori279/fluent-plugin-out-https)
 
 ### Exception Handling
 * For retries in case of exceptions, use
