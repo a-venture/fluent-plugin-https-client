@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name          = 'fluent-plugin-https-client'
-  gem.version       = '0.0.1'
+  gem.version       = '0.0.2'
   gem.authors       = ['Arash Vatanpoor']
   gem.email         = ['arash@a-venture.org']
   gem.summary       = %q{A generic Fluentd output plugin to send records to HTTP / HTTPS endpoint}
@@ -16,5 +16,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 2.1.2'
 
   gem.add_runtime_dependency 'yajl-ruby', '~> 1.0'
-  gem.add_runtime_dependency 'fluentd', '~> 0.12'
+  gem.add_runtime_dependency 'fluentd', '~> 1.0.0', '>= 0.12'
 end
